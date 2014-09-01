@@ -2,23 +2,23 @@
 import requests
 import bs4
 import re
-#url = 'http://www.alibaba.com/products/F0/plastic_recycle/----------------------50----------------------------EU.html'
-url = 'http://uk1019369980.trustpass.alibaba.com/contactinfo.html'
+from pyquery import PyQuery 
+from lxml import etree
+import urllib
 
-#将url转变为soup结构
-def getSoup(url):
-    response = requests.get(url)
-    return bs4.BeautifulSoup(response.text,"html5lib")
-    
+url = 'http://www.alibaba.com/products/F0/plastic_recycle/----------------------50----------------------------EU.html'
+url1 = 'http://uk1019369980.trustpass.alibaba.com/contactinfo.html'
+
+
 #获取单个单面的所有url
-def gSinglePageUrl(soup):
-    title = soup.find_all("a",class_="cd dot-product",href=re.compile("contactinfo"))
+def gSinglePageUrl(url):
+    d = PyQuery(url=url)
     ## url的大数组
     urls = []
-    for link in title:
-        url = link.get('href')
-        if  url not in urls:
-            urls.append(url)
+    d(".card .cat .atm").remove();
+    d(".card .cat .dot-product").each(lambda:url = PyQuery(this).attr("href")  if url not in urls   urls.append()
+                                      
+    )
     return urls
 
 #获取单个联系页面的信息    
@@ -50,6 +50,6 @@ def getContactInfo(soup):
                 key = "City"
 
     return info;
-    
-soup = getSoup(url);
-getContactInfo(soup);
+
+print(gSinglePageUrl(url))
+#getContactInfo(soup);
